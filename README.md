@@ -82,6 +82,8 @@ For help on any individual command run `vagrant COMMAND -h`
 - `rm -rf .vagrant`
 - `vagrant up`
 
+#### Restart your machine after installing or updating the plugin
+
 - if your machine isn't accepting the plugin and you can see nginx default page on `192.168.10.100` its fine for now
 - Push your progress by 14:00 and share your repos please.
 
