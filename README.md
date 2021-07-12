@@ -1,5 +1,7 @@
 # Setting up Development Env
 ## installation of Vagrant, Virtual box and Ruby
+![](dev_env.png)
+
 ### vagrant commands
 - ` vagrant up` to launch the vm
 - `vagrant destroy` to delete everything 
@@ -87,6 +89,7 @@ For help on any individual command run `vagrant COMMAND -h`
 - if your machine isn't accepting the plugin and you can see nginx default page on `192.168.10.100` its fine for now
 - Push your progress by 14:00 and share your repos please.
 
+https://github.com/agiledivider/vagrant-hostsupdater
 
 
 
