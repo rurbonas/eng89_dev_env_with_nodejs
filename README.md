@@ -68,7 +68,22 @@ For help on any individual command run `vagrant COMMAND -h`
 - step 6: repeat all the update and upgrade commands followed by installing nginx and checking of nginx
 - `ningx status active` should load nginx in the browswer with `192.168.10.100` as well as `http://development.local/`
 
+- if the `http://development.local/` doesn't work then try following debugging steps
+- open a new `Gitbash termial` as `admin`
+- `vagrant destroy`
+- `rm -rf .vagrant`
+- `vagrant up`
 
+- Just in case if still doesn't work then try:
+- `vagrant plugin uninstall vagrant-hostsupdater`
+- update plugin with `vagrant plugin update vagrant-hostsupdater`
+- open a new `Gitbash termial` as `admin`
+- `vagrant destroy`
+- `rm -rf .vagrant`
+- `vagrant up`
+
+- if your machine isn't accepting the plugin and you can see nginx default page on `192.168.10.100` its fine for now
+- Push your progress by 14:00 and share your repos please.
 
 
 
