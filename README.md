@@ -2,6 +2,31 @@
 ## installation of Vagrant, Virtual box and Ruby
 ![](dev_env.png)
 
+- To create a VM the dependencies we need are vagrant and virtual box and gitbash
+- the aim for today, when we do vagrant up, all the things we did yesterday should execute automatically including installing packages and 'vagrant ssh'
+- Vagrant has a method of syncing folders from our host os to our guest virtual machine. 
+
+### environment/spec-tests >> `gem install bundler`
+- `rake spec` returned failures
+- `sudo apt-get install nodejs -y`
+- `rake spec` again
+- `curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt-get install -y nodejs 
+sudo apt-get install -y npm`
+- `rake spec` again
+- `sudo apt-get install python-software-properties -y`
+- `sudo npm install -g pm2`
+- `sudo npm install`
+- `node app.js` inside the app folder
+- check http://192.168.10.100:3000/ in the browser
+- http://192.168.10.100:3000/fibonacci/13
+- `export course=devops` create an environment variable
+- `env` to check all. `printenv course` to check specific variable
+- `ls -la ~/ | more` in home directory of VM to find the `.profile` file
+- `nano .profile` and add `export DB_HOST=mongodb` start vm to see changes and `printenv DB_HOST`
+
+
+
 ### vagrant commands
 - ` vagrant up` to launch the vm
 - `vagrant destroy` to delete everything 
