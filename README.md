@@ -25,6 +25,28 @@ sudo apt-get install -y npm`
 - `ls -la ~/ | more` in home directory of VM to find the `.profile` file
 - `nano .profile` and add `export DB_HOST=mongodb` start vm to see changes and `printenv DB_HOST`
 
+- Add `sudo echo 'export DB_HOST=mongodb' >> .profile` directly in the `provision.sh` file. This is another option to add persistant variables
+
+### Adding proxies
+- `cd /etc/nginx/sites-available` default location of nginx
+- delete the `default` file
+- create an empty default file
+- `server {
+     listen 80;
+     server_name _;
+     location / {
+          proxy_pass http://192.168.10.100:3000;
+     proxy_http_version 1.1;
+     proxy_set_header Upgrade $http_upgrade;
+     proxy_set_header Connection 'upgrade';
+     proxy_set_header Host $host;
+     proxy_cache_bypass $http_upgrade;
+     }
+}`
+- `sudo nginx -t` to check if syntax is ok
+- go back to to /home/vagrant
+- `sudo systemctl restart nginx` to run nginx from start, and check the browser (192.168.10.100) to see if its redirecting to app.js
+- for troubleshooting: `ps aux` and `sudo kill` precesses that interfere with port 3000
 
 
 ### vagrant commands
