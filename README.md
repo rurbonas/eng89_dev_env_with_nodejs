@@ -48,6 +48,46 @@ sudo apt-get install -y npm`
 - `sudo systemctl restart nginx` to run nginx from start, and check the browser (192.168.10.100) to see if its redirecting to app.js
 - for troubleshooting: `ps aux` and `sudo kill` precesses that interfere with port 3000
 
+### Multiple VMs
+Amend Vagrantfile to create two VMs from one file
+```ruby
+Vagrant.configure("2") do |config|
+
+# set up a VM called db
+  config.vm.define "db" do |db|
+    db.vm.box = "ubuntu/xenial64"
+    db.vm.network "private_network", ip: "192.168.10.150"
+    db.vm.provision "shell", path: "./environment/db-provision.sh"
+  end
+
+# set up a VM called app
+  config.vm.define "app" do |app|
+    app.vm.box = "ubuntu/xenial64"
+    app.vm.synced_folder "environment", "/home/vagrant/env"
+    app.vm.synced_folder "app", "/home/vagrant/app"
+    app.vm.network "private_network", ip: "192.168.10.100"
+    app.hostsupdater.aliases = ["development.local"]
+    app.vm.provision "shell", path: "./environment/provision.sh"
+  end
+end
+```
+### Setting up the app
+
+
+- `vagrant ssh db` to access db VM
+- Open the `mongod.conf` file for editing by using `sudo nano /etc/mongod.conf`
+- find the `bindIp` and change it to `0.0.0.0`
+- save by pressing `Ctrl + X`
+- exit the db VM
+- enter the app VM using `vagrant ssh app`
+- if it's not changed in the `provision.sh` file, use sudo echo `'export DB_HOST=mongodb://192.168.10.150:27017/posts' >> .bashrc`
+- Run the source file by using `source ~/.bashrc`
+- Check if the variable is correct using `printenv DB_HOST`
+- navigate to app folder and run `npm start`
+- If it runs but /posts doesn't work, run `node seeds/seed.js` in the app folder
+- If it doesn't run at all, use `ps aux` and check for any `npm` or `node app.js` processes running and kill them by using `sudo kill` followed by the process number
+
+
 
 ### vagrant commands
 - ` vagrant up` to launch the vm
